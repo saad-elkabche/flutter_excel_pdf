@@ -1,9 +1,11 @@
 import 'dart:convert';
 
 import 'dart:io';
+import 'dart:typed_data';
 
-import 'package:flutter/foundation.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:syncfusion_flutter_pdf/pdf.dart';
@@ -140,6 +142,10 @@ class _HomeState extends State<Home> {
 
     pdfGrid.draw(page: page,bounds:Rect.fromLTWH(0, 50, 0, 0) );
 
+
+    ByteData data=await rootBundle.load('assets/img.png');
+    PdfBitmap image=PdfBitmap(data.buffer.asUint8List());
+    page.graphics.drawImage(image, Rect.fromLTWH(0, 0, 100, 120));
 
 
 
